@@ -17,27 +17,37 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>test
 
-		<?php if ( have_posts() ) : ?>
+		<script>
+			var group = [];
+			var lats = [];
+			var lons = [];
+			var ids = [];
+		</script>
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
+		<?php
+		$args = array( 
+			'post_type'			=> 'post',
+			'posts_per_page'	=> 999
+		);
+		$query = new WP_Query( $args );
+		if ( $query->have_posts() ) :
+			while ( $query->have_posts() ) : $query->the_post();
+				$name = the_title('', '', false);
+				$lat = get_post_meta($post->ID, "latitude", true );
+				$lon = get_post_meta($post->ID, "longitude", true );
 				?>
-
-			<?php endwhile; ?>
-
-			<?php _s_paging_nav(); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'content', 'none' ); ?>
-
+				<script>
+					var name = <?php echo json_encode($name); ?>;
+					var lat = <?php echo json_encode($lat); ?>;
+					var lon = <?php echo json_encode($lon); ?>;
+					var id = <?php json_encode(the_ID()) ?>;
+					group.push(name);
+					lats.push(parseFloat(lat));
+					lons.push(parseFloat(lon));
+					ids.push(parseInt(id));
+				</script>
+			<?php endwhile;
+			wp_reset_postdata(); ?>
 		<?php endif; ?>
 
 		</main><!-- #main -->
@@ -47,5 +57,5 @@ get_header(); ?>
 <?php get_footer(); ?>
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([39.0997, -94.5783], 9);
+    .setView([39.0997, -94.5783], 9); 
 </script>
