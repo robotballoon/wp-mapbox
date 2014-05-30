@@ -666,3 +666,47 @@ object {
 	max-width: 11.11%;
 }
 .gallery-caption {}
+
+
+body {
+	background: #444349;
+	color: #fff;
+}
+
+a, a:hover, a:visited {
+	color: #fff;
+}
+
+#page {
+	width: 960px;
+	margin: 30px auto 0;
+}
+
+.site-title {
+	display: block;
+	font-size: 30px;
+}
+
+.site-title a {
+	text-decoration: none;
+}
+
+.site-description {
+	display: none;
+}
+
+.main-navigation {
+	padding: 15px 0;
+}
+
+.main-navigation li {
+	margin-right: 20px;
+}
+
+.comments-area {
+	display: none;
+}
+
+.site-footer {
+	margin-top: 30px;
+}

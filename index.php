@@ -15,7 +15,8 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>test
+		<p>This theme is a test to document http://mapsam.com/wordmap/ integration into a wordpress theme</p>
+		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>
 
 		<script>
 			var group = [];
@@ -53,7 +54,7 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
+<?php //get_sidebar(); ?>
 <?php get_footer(); ?>
 <script>
 var map = L.mapbox.map('map', 'umkcmaps.iciao40c')
