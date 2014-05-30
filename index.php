@@ -56,6 +56,6 @@ get_header(); ?>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+var map = L.mapbox.map('map', 'umkcmaps.iciao40c')
     .setView([39.0997, -94.5783], 9); 
 </script>
