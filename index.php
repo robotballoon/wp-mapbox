@@ -15,6 +15,7 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>test
 
 		<?php if ( have_posts() ) : ?>
 
@@ -44,3 +45,7 @@ get_header(); ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([39.0997, -94.5783], 9);
+</script>
