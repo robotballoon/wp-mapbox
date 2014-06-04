@@ -19,7 +19,8 @@ get_header(); ?>
 		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>
 
 		<script>
-			var group = [];
+			var titles = [];
+			var excerpts = [];
 			var lats = [];
 			var lons = [];
 			var ids = [];
@@ -34,15 +35,20 @@ get_header(); ?>
 		if ( $query->have_posts() ) :
 			while ( $query->have_posts() ) : $query->the_post();
 				$name = the_title('', '', false);
-				$lat = get_post_meta($post->ID, "latitude", true );
-				$lon = get_post_meta($post->ID, "longitude", true );
+				$ex = the_content('','',true);
+				$lat = get_post_meta($post->ID, "coordinates_lat", true );
+				$lon = get_post_meta($post->ID, "coordinates_lon", true );
+				echo '<h1>lat: '.$lat.'</h1>';
+				echo '<h1>lng: '.$lon.'</h1>';
 				?>
 				<script>
 					var name = <?php echo json_encode($name); ?>;
+					var ex = <?php echo json_encode($ex); ?>;
 					var lat = <?php echo json_encode($lat); ?>;
 					var lon = <?php echo json_encode($lon); ?>;
 					var id = <?php json_encode(the_ID()) ?>;
-					group.push(name);
+					titles.push(name);
+					excerpts.push(ex);
 					lats.push(parseFloat(lat));
 					lons.push(parseFloat(lon));
 					ids.push(parseInt(id));
@@ -56,7 +62,3 @@ get_header(); ?>
 
 <?php //get_sidebar(); ?>
 <?php get_footer(); ?>
-<script>
-var map = L.mapbox.map('map', 'umkcmaps.iciao40c')
-    .setView([39.0997, -94.5783], 9); 
-</script>

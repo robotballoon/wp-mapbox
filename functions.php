@@ -98,6 +98,8 @@ function _s_scripts() {
 
 	wp_enqueue_script( 'mapboxJS', 'https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js');
 
+	wp_enqueue_script( 'map-js', get_template_directory_uri() . '/js/map.js', array('jquery'), true);
+
 	wp_enqueue_script( '_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( '_s-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -132,3 +134,8 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Latitude and Longitude Meta Boxes on posts.
+ */
+require get_template_directory() . '/inc/points-meta.php';
