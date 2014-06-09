@@ -16,7 +16,7 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 		<p>This theme is a test to document http://mapsam.com/wordmap/ integration into a wordpress theme</p>
-		<div id='map' style ="position:relative; display: block; width:100%; height: 300px;"></div>
+		<div id='map'></div>
 
 		<script>
 			var titles = [];
@@ -34,25 +34,29 @@ get_header(); ?>
 		$query = new WP_Query( $args );
 		if ( $query->have_posts() ) :
 			while ( $query->have_posts() ) : $query->the_post();
-				$name = the_title('', '', false);
-				$ex = the_content('','',true);
-				$lat = get_post_meta($post->ID, "coordinates_lat", true );
-				$lon = get_post_meta($post->ID, "coordinates_lon", true );
-				echo '<h1>lat: '.$lat.'</h1>';
-				echo '<h1>lng: '.$lon.'</h1>';
-				?>
-				<script>
-					var name = <?php echo json_encode($name); ?>;
-					var ex = <?php echo json_encode($ex); ?>;
-					var lat = <?php echo json_encode($lat); ?>;
-					var lon = <?php echo json_encode($lon); ?>;
-					var id = <?php json_encode(the_ID()) ?>;
-					titles.push(name);
-					excerpts.push(ex);
-					lats.push(parseFloat(lat));
-					lons.push(parseFloat(lon));
-					ids.push(parseInt(id));
-				</script>
+				echo '<article>';
+					$name = the_title('', '', false);
+					$ex = the_content('','',true);
+					$lat = get_post_meta($post->ID, "coordinates_lat", true );
+					$lon = get_post_meta($post->ID, "coordinates_lon", true );
+					echo '<h1>lat: '.$lat.'</h1>';
+					echo '<h1>lng: '.$lon.'</h1>';
+				echo '</article>';
+		?>
+				
+		<script>
+			var name = <?php echo json_encode($name); ?>;
+			var ex = <?php echo json_encode($ex); ?>;
+			var lat = <?php echo json_encode($lat); ?>;
+			var lon = <?php echo json_encode($lon); ?>;
+			var id = <?php json_encode(the_ID()) ?>;
+			titles.push(name);
+			excerpts.push(ex);
+			lats.push(parseFloat(lat));
+			lons.push(parseFloat(lon));
+			ids.push(parseInt(id));
+		</script>
+				
 			<?php endwhile;
 			wp_reset_postdata(); ?>
 		<?php endif; ?>
